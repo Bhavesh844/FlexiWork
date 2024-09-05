@@ -2,11 +2,30 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView,DeleteView
 
 from jobsapp.decorators import user_is_employer
 from jobsapp.forms import CreateJobForm
 from jobsapp.models import Job, Applicant
+from django.contrib import messages
+
+class JobDeleteView(DeleteView):
+    model = Job
+    template_name = 'jobs/employer/job_confirm_delete.html'  # Create a confirmation page template
+    success_url = reverse_lazy('jobs:employer-dashboard')
+
+    @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
+    @method_decorator(user_is_employer)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(self.request, *args, **kwargs)
+
+    def get_queryset(self):
+        """Ensure only the employer who posted the job can delete it."""
+        return Job.objects.filter(user=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, "The job has been deleted.")
+        return super().delete(request, *args, **kwargs)
 
 
 class DashboardView(ListView):
