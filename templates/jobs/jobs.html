@@ -9,29 +9,37 @@
     <section class="job-form-section job-form-section--compressed">
         <div class="container">
             <h4 class="heading">Find a <span class="accent">job </span> you will <span class="accent">love</span></h4>
-            <form id="job-main-form" method="get" action="#" class="job-main-form">
+            <form id="job-main-form" method="get" action="{% url 'jobs:searh' %}" class="job-main-form">
                 <div class="controls">
-                    <div class="row align-items-end">
-                        <div class="col-sm-1 col-lg-2"></div>
-                        <div class="col-sm-5 col-lg-4 form-group">
-                            <label for="profession">Profession</label>
-                            <input type="text" id="profession" name="profession"
-                                   placeholder="Profession you are looking for" class="form-control">
-                        </div>
-                        <div class="col-sm-5 col-lg-4 form-group">
-                            <label for="location">Location</label>
-                            <input type="text" id="location" name="location" placeholder="Any particular location?"
-                                   value="Bay Area" class="form-control">
-                        </div>
-                        <div class="col-sm-1 col-lg-2 form-group">
-                            <button type="submit" name="name"
-                                    class="btn btn-outline-white-primary job-main-form__button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
+                  <div class="row align-items-center">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="profession">Position</label>
+                        <input type="text" id="profession" name="position" placeholder="Position you are looking for" class="form-control" />
+                      </div>
                     </div>
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="Any particular location?" class="form-control" />
+                      </div>
+                    </div>
+                    <!-- Dropdown for selecting voice recognition language -->
+                    <div class="form-group">
+                      <label for="language-select">Select Language</label>
+                      <select id="language-select" class="form-control">
+                        <option value="en-US">English</option>
+                        <option value="hi-IN">Hindi</option>
+                      </select>
+                    </div>
+                    <!-- Add a button to start voice search -->
+                    <button id="voice-search-btn" type="button" class="btn btn-outline-white-primary"><i class="fa fa-microphone"></i> Voice Search</button>
+                    <div class="col-md-2">
+                      <button type="submit" class="btn btn-outline-white-primary job-main-form__button"><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
                 </div>
-            </form>
+              </form>
         </div>
     </section>
     <section>
@@ -43,7 +51,7 @@
                         <div class="col-md-12 col-lg-6">
                             <div class="row">
                                 <div class="col-2">
-                                    <img src="{% static 'img/company-1.png' %}"
+                                    <img src="{% static 'img/dcompany-1.png' %}"
                                          alt="Ipsioou " class="img-fluid">
                                 </div>
                                 <div class="col-10">
@@ -106,5 +114,7 @@
             {% endif %}
         </div>
     </section>
+  <script src="{% static 'js/voice.js' %}"></script>
+
 
 {% endblock %}
