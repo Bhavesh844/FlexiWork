@@ -17,9 +17,10 @@ class RegisterEmployeeView(CreateView):
     }
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return HttpResponseRedirect(self.get_success_url())
+        if self.request.user.is_authenticated and not self.request.user.is_superuser:
+            return HttpResponseRedirect(self.get_success_url())  # Redirect non-admin authenticated users
         return super().dispatch(self.request, *args, **kwargs)
+
 
     def post(self, request, *args, **kwargs):
 
@@ -46,9 +47,10 @@ class RegisterEmployerView(CreateView):
     }
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return HttpResponseRedirect(self.get_success_url())
+        if self.request.user.is_authenticated and not self.request.user.is_superuser:
+            return HttpResponseRedirect(self.get_success_url())  # Redirect non-admin authenticated users
         return super().dispatch(self.request, *args, **kwargs)
+
 
     def post(self, request, *args, **kwargs):
 
@@ -77,8 +79,8 @@ class LoginView(FormView):
     }
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return HttpResponseRedirect(self.get_success_url())
+        if self.request.user.is_authenticated and not self.request.user.is_superuser:
+            return HttpResponseRedirect(self.get_success_url())  # Redirect non-admin authenticated users
         return super().dispatch(self.request, *args, **kwargs)
 
     def get_success_url(self):

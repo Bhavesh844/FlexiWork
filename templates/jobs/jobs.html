@@ -9,29 +9,60 @@
     <section class="job-form-section job-form-section--compressed">
         <div class="container">
             <h4 class="heading">Find a <span class="accent">job </span> you will <span class="accent">love</span></h4>
-            <form id="job-main-form" method="get" action="#" class="job-main-form">
-                <div class="controls">
-                    <div class="row align-items-end">
-                        <div class="col-sm-1 col-lg-2"></div>
-                        <div class="col-sm-5 col-lg-4 form-group">
-                            <label for="profession">Profession</label>
-                            <input type="text" id="profession" name="profession"
-                                   placeholder="Profession you are looking for" class="form-control">
+            <section class="job-search-section py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="search-box p-4 bg-white shadow rounded">
+                    <h2 class="heading text-center mb-4 font-weight-bold">
+                        Find Your <span class="text-primary">Perfect Job</span>
+                    </h2>
+                    <form id="job-main-form" method="get" action="{% url 'jobs:searh' %}" class="job-main-form">
+                        <div class="controls">
+                            <div class="row align-items-center">
+                                <!-- Position Input -->
+                                <div class="col-md-5">
+                                    <div class="form-group mb-3">
+                                        <input type="text" id="profession" name="position" placeholder="What job are you looking for?" class="form-control form-control-lg" />
+                                    </div>
+                                </div>
+                                <!-- Location Input -->
+                                <div class="col-md-5">
+                                    <div class="form-group mb-3">
+                                        <input type="text" id="location" name="location" placeholder="Location (City or Region)" class="form-control form-control-lg" />
+                                    </div>
+                                </div>
+                                <!-- Search Button -->
+                                <div class="col-md-2 d-flex align-items-center">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                        <i class="fa fa-search"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Voice Search Section -->
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <label for="language-select" class="sr-only">Language for Voice Search</label>
+                                    <select id="language-select" class="form-control form-control-lg">
+                                        <option value="en-US">English</option>
+                                        <option value="hi-IN">Hindi</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button id="voice-search-btn" type="button" class="btn btn-outline-primary btn-lg">
+                                        <i class="fa fa-microphone"></i> Voice Search
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-5 col-lg-4 form-group">
-                            <label for="location">Location</label>
-                            <input type="text" id="location" name="location" placeholder="Any particular location?"
-                                   value="Bay Area" class="form-control">
-                        </div>
-                        <div class="col-sm-1 col-lg-2 form-group">
-                            <button type="submit" name="name"
-                                    class="btn btn-outline-white-primary job-main-form__button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
+        </div>
+    </div>
+</section>
+
         </div>
     </section>
     <section>
@@ -43,7 +74,7 @@
                         <div class="col-md-12 col-lg-6">
                             <div class="row">
                                 <div class="col-2">
-                                    <img src="{% static 'img/company-1.png' %}"
+                                    <img src="{% static 'img/dcompany-1.png' %}"
                                          alt="Ipsioou " class="img-fluid">
                                 </div>
                                 <div class="col-10">
@@ -106,5 +137,7 @@
             {% endif %}
         </div>
     </section>
+  <script src="{% static 'js/voice.js' %}"></script>
+
 
 {% endblock %}
